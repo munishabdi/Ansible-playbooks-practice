@@ -1,0 +1,13 @@
+---
+- name: Install multiple packages
+  hosts: all 
+  become: true 
+  tasks:
+  - name: Install multiple packages, nginx, git, curl, tree
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - nginx
+      - git
+      - tree

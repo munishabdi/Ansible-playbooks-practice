@@ -1,0 +1,15 @@
+---
+- name: install APACHE server in centos machines
+  hosts: centos 
+  become: true
+  tasks:
+    - name: Install apache httpd  
+      yum: 
+        name: httpd 
+        state: present 
+
+    - name: start apache httpd server 
+      service:
+        name: httpd 
+        state: started 
+        enabled: yes  

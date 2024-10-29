@@ -1,0 +1,23 @@
+---
+- name: Install nginx server 
+  hosts: ubuntu 
+  become: true 
+  tasks:
+    - name: Install NGINX 
+      apt: 
+        name: nginx 
+        state: present 
+      vars:
+        nginx_action: "started" # set to started or stopped as desired 
+
+    - name: Start NGINX server 
+      service:
+        name: nginx
+        state: started 
+      when: nginx_action == "started"
+
+    - name: stop NGINX server
+      service:
+        name: nginx 
+        state: stopped 
+      when: nginx_action == "stopped"

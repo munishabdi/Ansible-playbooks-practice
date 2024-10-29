@@ -1,0 +1,24 @@
+---
+- name: Install nginx server 
+  hosts: centos 
+  become: true
+  vars: 
+    nginx_action: "started"
+
+  tasks:
+    - name: Install NGINX 
+      yum: 
+        name: nginx 
+        state: present 
+
+    - name: Start NGINX server 
+      service:
+        name: nginx
+        state: started
+      when: nginx_action == "started"  
+    
+    - name: stop NGINX server
+      service:
+        name: nginx
+        state: stopped
+      when: nginx_action == "stopped"

@@ -1,0 +1,16 @@
+---
+- name: Install Tomcat server on ubuntu machines 
+  hosts: ubuntu 
+  become_user: root 
+  tasks:
+    - name: Install tomcat server 
+      apt: 
+        name: tomcat
+        state: present 
+        update_cache: yes 
+
+    - name: Start tomcat server 
+      service:
+        name: tomcat
+        state: started 
+        enabled: yes
